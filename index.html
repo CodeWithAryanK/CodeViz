@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="CodeViz - Visualize your Codeforces profile with detailed statistics, rating history, problem-solving patterns, and performance analytics. Track your competitive programming journey." />
+  <meta name="keywords" content="Codeforces, competitive programming, code visualization, programming statistics, rating history, problem solving, programming analytics" />
+  <meta name="author" content="ARYAN KUMAR" />
+  <meta name="robots" content="index, follow" />
+  
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:title" content="CodeViz - Codeforces Profile Visualizer" />
+  <meta property="og:description" content="Visualize your Codeforces journey with detailed statistics, rating history, and problem-solving patterns." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://codeviz.com" />
+  <meta property="og:image" content="ChatGPT Image May 28, 2025, 02_14_53 AM.svg" />
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CodeViz - Codeforces Profile Visualizer" />
+  <meta name="twitter:description" content="Visualize your Codeforces journey with detailed statistics, rating history, and problem-solving patterns." />
+  <meta name="twitter:image" content="ChatGPT Image May 28, 2025, 02_14_53 AM.svg" />
+  
+  <title>CodeViz - Codeforces Profile Visualizer | Track Your Programming Journey</title>
+  <link rel="icon" type="image/svg+xml" href="ChatGPT Image May 28, 2025, 02_14_53 AM.svg">
+  <link rel="canonical" href="https://codeviz.com" />
+  <link rel="stylesheet" href="style.css"/>
+  <!-- <link rel="stylesheet" href="nstyle.css"/> -->
+</head>
+
+
+<body>
+  <!-- Landing Page -->
+  <div id="landing-page" class="landing-container">
+    <h1 class="landing-title">Codeforces Profile Visualizer</h1>
+    <p class="landing-subtitle">Visualize your Codeforces journey</p>
+    <form id="handle-form" class="handle-form">
+      <label for="cf-handle">Codeforces Handle</label>
+      <div class="handle-input-group">
+        <input type="text" id="cf-handle" placeholder="Enter Codeforces handle" required />
+        <button type="submit">Visualize</button>
+      </div>
+    </form>
+    <footer class="landing-footer">
+      Created with <span style="color: #e25555;">♥</span> by ARYAN KUMAR | Data from Codeforces API
+    </footer>
+  </div>
+
+  <!-- Profile Visualizer -->
+  <div id="profile-visualizer" class="container" style="display:none;">
+    <!-- Profile Header -->
+    <div class="profile-header">
+      <img src="" alt="Profile Avatar" class="profile-avatar" id="profile-avatar">
+      <div class="profile-info">
+        <h1><a id="profile-username-link" href="#" target="_blank" style="color:inherit;text-decoration:underline dotted;"> <span id="profile-username">Username</span></a></h1>
+        <p id="profile-rank">Rank: Master</p>
+        <p id="profile-rating">Rating: 2000</p>
+        <p id="profile-max-rating">Max Rating: 2200 <span id="profile-max-rank" class="max-rank"></span></p>
+      </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="profile-stats">
+      <div class="stat-card"><h3>Solved Problems</h3><p id="solved-count">--</p></div>
+      <div class="stat-card"><h3>Contests</h3><p id="contest-count">--</p></div>
+      <div class="stat-card"><h3>Contribution</h3><p id="contribution">--</p></div>
+      <div class="stat-card"><h3>Friends</h3><p id="friend-count">--</p></div>
+    </div>
+
+    <!-- Rating History Chart -->
+    <section class="chart-section">
+      <h2>Rating History</h2>
+      <canvas id="ratingChart"></canvas>
+    </section>
+    <!-- languages used -->
+    <section class="languages-section">
+      <h2>Languages Used</h2>
+      <div id="languages-chart-container">
+        <canvas id="languagesChart"></canvas>
+      </div>
+    </section>
+    <!-- Problem Tags -->
+    <section class="tags-section">
+      <h2>Problems by Tags</h2>
+      <div id="tags-chart-container">
+        <canvas id="tagsChart"></canvas>
+      </div>
+    </section>
+    
+    <section class="ratings-section">
+      <h2>Problems by Rating</h2>
+      <canvas id="ratingsChart" width="600" height="300"></canvas>
+    </section>
+    
+    <!-- Levels Chart -->
+    <section class="levels-section">
+      <h2>Levels of Problems  <span id="levels-username"></span></h2>
+      <canvas id="levelsChart"></canvas>
+    </section> 
+    
+    <div class="summary-tables">
+      <div class="summary-table">
+        <div class="summary-header">Some numbers about <span id="summary-username"></span></div>
+        <table>
+          <tr>
+            <td>
+              Unique Tried
+              <span class="info-icon" data-tooltip="Unique problems you've attempted">?</span>
+            </td>
+            <td id="tried-count">--</td>
+          </tr>
+          <tr>
+            <td>
+              Unique Solved
+              <span class="info-icon" data-tooltip="Unique problems you've solved at least once">?</span>
+            </td>
+            <td id="solved-count-table">--</td>
+          </tr>
+          <tr>
+            <td>
+              Success Rate
+              <span class="info-icon" data-tooltip="Percentage of tried problems that were solved">?</span>
+            </td>
+            <td id="avg-attempts">--</td>
+          </tr>
+          <tr>
+            <td>
+              First Try Solves
+              <span class="info-icon" data-tooltip="Number of problems you solved in the first submission">?</span>
+            </td>
+            <td id="max-attempts">--</td>
+          </tr>
+          <tr>
+            <td>
+              Hardest Solved Rating
+              <span class="info-icon" data-tooltip="The highest rated problem you solved">?</span>
+            </td>
+            <td id="one-submission">--</td>
+          </tr>
+        </table>
+      </div>
+      <div class="summary-table">
+        <div class="summary-header">Contests of <span id="contests-username"></span></div>
+        <table>
+          <tr><td>Number of contests</td><td id="contest-num">--</td></tr>
+          <tr><td>Best rank</td><td id="best-rank">--</td></tr>
+          <tr><td>Worst rank</td><td id="worst-rank">--</td></tr>
+          <tr><td>Max up</td><td id="max-up">--</td></tr>
+          <tr><td>Max down</td><td id="max-down">--</td></tr>
+        </table>
+      </div>
+    </div>
+
+    
+
+    <hr class="footer-separator">
+    <footer class="profile-footer">
+      <div class="footer-links">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe-niLkn_5Lp8HJaH-XVsPXf0JoLTQ8V-uJnVaE3rd_64rNEg/viewform?usp=sharing&ouid=114797109790316681769" target="_blank" class="footer-link">
+          <img src="customer-feedback-form-2352681-1959860.webp" alt="Feedback Form" class="footer-icon" style="vertical-align:middle;"> Feedback Form
+        </a>
+        <span class="footer-link">
+          <a href="mailto:aryankumar9180@gmail.com" target="_blank" title="Email">
+            <img src="icons8-gmail.svg" alt="Gmail" class="footer-icon" style="vertical-align:middle;">
+          </a>
+        </span>
+        <span class="footer-socials">
+          <a href="https://github.com/codewithAryanK" target="_blank" title="GitHub">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="footer-icon">
+          </a>
+          <a href="https://www.linkedin.com/in/aryankumartiwary" target="_blank" title="LinkedIn">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" class="footer-icon">
+          </a>
+        </span>
+        <span class="footer-visitor-counter">
+          <a href="https://www.hitwebcounter.com" target="_blank">
+            <img src="https://hitwebcounter.com/counter/counter.php?page=20776016&style=0006&nbdigits=5&type=page&initCount=0" title="Counter Widget" alt="Visit counter For Websites" border="0" />
+          </a>
+        </span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+</body>
+</html>
