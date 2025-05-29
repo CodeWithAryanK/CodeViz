@@ -101,6 +101,7 @@ body {
     .profile-header {
         flex-direction: column;
         text-align: center;
+        gap: 1rem;
     }
 
     .profile-avatar {
@@ -109,13 +110,156 @@ body {
     }
 
     .container {
-        margin: 1rem;
+        margin: 0.5rem;
         padding: 1rem;
     }
 
     .profile-info h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
+
+    .profile-info p {
+        font-size: 1rem;
+    }
+
+    .stat-card {
+        padding: 1rem;
+    }
+
+    .stat-card h3 {
+        font-size: 1rem;
+    }
+
+    .stat-card p {
+        font-size: 1.5rem;
+    }
+
+    .chart-section, .languages-section, .tags-section, .ratings-section, .levels-section {
+        padding: 1rem 0.5rem;
+    }
+
+    .summary-tables {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .summary-table {
+        min-width: 100%;
+        margin: 0;
+    }
+
+    .summary-header {
+        font-size: 1rem;
+        padding: 0.8rem;
+    }
+
+    .summary-table td {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: 0.7em;
+        align-items: center;
+    }
+
+    .footer-visitor-counter {
+        position: static;
+        margin: 1em 0;
+        justify-content: center;
+    }
+
+    .footer-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .landing-title {
+        font-size: 1.8rem;
+        text-align: center;
+        padding: 0 1rem;
+    }
+
+    .landing-subtitle {
+        font-size: 1rem;
+        text-align: center;
+        padding: 0 1rem;
+    }
+
+    .handle-form {
+        width: 90%;
+        padding: 1rem;
+    }
+
+    .handle-input-group {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .handle-input-group input[type="text"] {
+        width: 100%;
+    }
+
+    .handle-input-group button {
+        width: 100%;
+        padding: 0.8rem;
+    }
+
+    .profile-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .chart-section canvas, 
+    .languages-section canvas, 
+    .tags-section canvas, 
+    .ratings-section canvas, 
+    .levels-section canvas {
+        max-width: 100%;
+        height: auto !important;
+    }
+
+    .footer-separator {
+        margin: 1.5rem 0 1rem 0;
+    }
+
+    .profile-footer {
+        padding: 1rem 0;
+        font-size: 0.9em;
+    }
+}
+
+/* Fix for chart responsiveness */
+.chart-section, .languages-section, .tags-section, .ratings-section, .levels-section {
+    position: relative;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.chart-section canvas, 
+.languages-section canvas, 
+.tags-section canvas, 
+.ratings-section canvas, 
+.levels-section canvas {
+    max-width: 100%;
+    height: auto !important;
+}
+
+/* Improve touch targets */
+button, 
+.footer-link, 
+.footer-icon {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Prevent text size adjustment */
+html {
+    -webkit-text-size-adjust: 100%;
 }
 
 .landing-container {
